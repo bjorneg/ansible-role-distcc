@@ -1,7 +1,7 @@
 Ansible Role: distcc
 ====================
 
-[![Build Status](https://travis-ci.org/anthony25/ansible-role-distcc.svg?branch=master)](https://travis-ci.org/anthony25/ansible-role-distcc)
+[![Build Status](https://travis-ci.org/Anthony25/ansible-role-distcc.svg?branch=master)](https://travis-ci.org/Anthony25/ansible-role-distcc)
 
 Ansible role to install distcc and distccd.
 

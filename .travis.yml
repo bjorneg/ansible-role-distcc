@@ -30,9 +30,9 @@ script:
 
   # Run the role/playbook again, checking to make sure it's idempotent
   - >
-    ansible-playbook tests/test.yml -i tests/inventory --connection=local --become
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
+    ansible-playbook -i tests/inventory tests/test.yml --connection=local --become
+    | tee /tmp/output.txt; grep -q 'changed=0.*failed=0' /tmp/output.txt &&
+    (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Playbook specific tests
