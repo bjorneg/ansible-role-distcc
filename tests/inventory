@@ -1,1 +1,1 @@
-localhost
+localhost distcc_start="true"
