@@ -2,6 +2,6 @@
 
 distcc_packages:
   - distcc
-distcc_service_name: distccd
+distcc_service_name: distcc
 
 # vim: set ts=2 sw=2:
