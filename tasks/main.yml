@@ -1,0 +1,39 @@
+---
+
+- name: Include distribution specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+      - "vars/{{ ansible_distribution }}.yml"
+      skip: true
+
+- name: Include release specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+      - "vars/{{ ansible_distribution_release }}.yml"
+      skip: true
+
+- include: Archlinux.yml
+  when: ansible_distribution == "Archlinux"
+
+- include: Ubuntu.yml
+  when: ansible_distribution == "Ubuntu"
+
+- name: Configure distcc hosts
+  become: yes
+  template:
+    src: "hosts.j2"
+    dest: "/etc/distcc/hosts"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure distccd service is started and enabled on boot
+  become: yes
+  service:
+    name: "{{ distcc_service_name }}"
+    state: started
+    enabled: yes
+
+# vim: set ts=2 sw=2:

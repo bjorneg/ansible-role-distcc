@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+#
+# Parameters to be passed to distccd
+#
+# You must explicitly add IPs (or subnets) that are allowed to connect,
+# using the --allow switch.  See the distccd manpage for more info.
+#
+DISTCC_ARGS="{% for n in distcc_allowed_nets %}--allow {{ n }} {% endfor %}{% for addr in distcc_listener %}--listen {{ addr }} {% endfor %}{% if distcc_nice %}-N {{distcc_nice}} {% endif %}{% if distcc_jobs %}-j {{distcc_jobs}} {% endif %}{% if distcc_zeroconf and distcc_zeroconf != "false" %}--zeroconf {% endif %}"

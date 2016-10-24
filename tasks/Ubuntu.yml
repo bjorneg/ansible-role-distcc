@@ -1,0 +1,23 @@
+---
+
+- name: Install distcc packages
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - "{{ distcc_packages }}"
+
+- name: Distcc configuration
+  become: yes
+  template:
+    src: "default/ubuntu_distcc.j2"
+    dest: "/etc/default/distcc"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart distccd
+
+# vim: set ts=2 sw=2:

@@ -1,0 +1,33 @@
+---
+
+- name: Install distcc packages
+  become: yes
+  pacman:
+    pkg: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ distcc_packages }}"
+
+- name: Distcc configuration
+  become: yes
+  template:
+    src: "conf.d/arch_distccd.j2"
+    dest: "/etc/conf.d/distccd"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart distccd
+
+- name: Set if distccd should be started or not
+  become: yes
+  template:
+    src: "default/arch_distcc.j2"
+    dest: "/etc/default/distcc"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart distccd
+
+# vim: set ts=2 sw=2:

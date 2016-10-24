@@ -1,0 +1,9 @@
+---
+
+- name: restart distccd
+  become: yes
+  service:
+    name: "{{ distcc_service_name }}"
+    state: restarted
+
+# vim: set ts=2 sw=2:
