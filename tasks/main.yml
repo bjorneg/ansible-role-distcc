@@ -20,6 +20,9 @@
 - include: Ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 
+- include: Ubuntu.yml
+  when: ansible_distribution == "Debian"
+
 - name: Configure distcc hosts
   become: yes
   template:
