@@ -11,6 +11,9 @@ galaxy_info:
       versions:
         - trusty
         - xenial
+    - name: Debian
+      versions:
+        - buster
     - name: Archlinux
   galaxy_tags:
     - system
